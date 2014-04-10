@@ -39,6 +39,9 @@ When the client goes offline, dualStorage allows you to keep changing and destro
     people.models[0].save({age: 41});  // update existing ones...
     people.models[1].destroy();        // and destroy as well
 
+    // collections expose a function that determines if they're dirty
+    people.hasDirtyOrDestroyed();		// => true or false
+
     // collections track what is dirty and destroyed
     people.dirtyModels()               // => Array of dirty models
     people.destroyedModelIds()         // => Array of destroyed model ids

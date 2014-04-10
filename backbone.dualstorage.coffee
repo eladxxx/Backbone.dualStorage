@@ -18,6 +18,9 @@ getStoreName = (collection, model) ->
   result(collection, 'storeName') || result(model, 'storeName') ||
   result(collection, 'url')       || result(model, 'urlRoot')   || result(model, 'url')
 
+Backbone.Collection.prototype.hasDirtyOrDestroyed = ->
+  return not _.isEmpty(localStorage.getItem("#{getStoreName(@)}_dirty")) or not _.isEmpty(localStorage.getItem("#{getStoreName(@)}_destroyed"))
+
 Backbone.Collection.prototype.discard = (what) ->
   if not what or what is 'dirty'
     localStorage.removeItem("#{getStoreName(@)}_dirty")
