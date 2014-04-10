@@ -18,6 +18,12 @@ getStoreName = (collection, model) ->
   result(collection, 'storeName') || result(model, 'storeName') ||
   result(collection, 'url')       || result(model, 'urlRoot')   || result(model, 'url')
 
+Backbone.Collection.prototype.discard = (what) ->
+  if not what or what is 'dirty'
+    localStorage.removeItem("#{getStoreName(@)}_dirty")
+  if not what or what is 'destroyed'
+    localStorage.removeItem("#{getStoreName(@)}_destroyed")
+
 # Make it easy for collections to sync dirty and destroyed records
 # Simply call collection.syncDirtyAndDestroyed()
 Backbone.Collection.prototype.syncDirty = ->

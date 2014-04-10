@@ -48,6 +48,12 @@ When the client goes offline, dualStorage allows you to keep changing and destro
 
 Keep in mind that if you try to fetch() a collection that has dirty data, only data currently in the localStorage will be loaded. collection.syncDirtyAndDestroyed() needs to be executed before trying to download new data from the server.
 
+Discarding dirty data is possible using the `discard` method:
+
+    people.discard()					// discard dirty/destroyed models
+    people.discard('dirty')				// discard dirty models only
+    people.discard('destroyed')			// discard destroyed models only
+
 It is possible to tell whether the operation succeeded remotely or locally by examining `options.dirty` in the `success` callback:
 
 	model.save({
