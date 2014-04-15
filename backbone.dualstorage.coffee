@@ -262,10 +262,10 @@ dualsync = (method, model, options) ->
   options.error   = callbackTranslator.forDualstorageCaller(options.error, model, options)
 
   # execute only online sync
-  return onlineSync(method, model, options) if result(model, 'remote') or result(model.collection, 'remote')
+  return onlineSync(method, model, options) if result(model, 'remote') or result(model.collection, 'remote') or options.remote
 
   # execute only local sync
-  local = result(model, 'local') or result(model.collection, 'local')
+  local = result(model, 'local') or result(model.collection, 'local') or options.local
   options.dirty = options.remote is false and not local
   return localsync(method, model, options) if options.remote is false or local
 
